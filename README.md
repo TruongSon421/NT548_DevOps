@@ -4,7 +4,7 @@
   </a>
 </div>
 <!-- Header -->
-<h1 align="center"><b>Công nghệ DevOps và úng dụng</b></h>
+<h1 align="center"><b>Công nghệ DevOps và ứng dụng</b></h>
 
 
 # Giới thiệu bản thân
