@@ -1,0 +1,80 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS CloudFormation Template to create a NAT Gateway
+
+Parameters:
+  Name:
+    Type: String
+    Description: Name prefix for all resources
+  VPCStack:
+    Type: String
+    Description: Name of the VPC stack
+  
+Resources:
+  NatGatewayEIP1:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+    Tags:
+      - Key: Name
+        Value: !Sub "${Name}-nat-eip-1"
+  NatGatewayEIP2:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+    Tags:
+      - Key: Name
+        Value: !Sub "${Name}-nat-eip-2"
+
+  NatGateway1:
+    Type: AWS::EC2::NatGateway
+    Properties: 
+      AllocationId: !GetAtt NatGatewayEIP.AllocationId
+      SubnetId: 
+        Fn::Select:
+          - 0
+          - Fn::Split:
+            - ','
+            - Fn::ImportValue:
+                !Sub "${VPCStack}-PublicSubnets"
+      Tags:
+        - Key: Name
+          Value: !Sub "${Name}-nat-gateway-1"
+
+  NatGateway2:
+    Type: AWS::EC2::NatGateway
+    Properties: 
+      AllocationId: !GetAtt NatGatewayEIP.AllocationId
+      SubnetId: 
+        Fn::Select:
+          - 1
+          - Fn::Split:
+            - ','
+            - Fn::ImportValue:
+                !Sub "${VPCStack}-PublicSubnets"
+      Tags:
+        - Key: Name
+          Value: !Sub "${Name}-nat-gateway-2"
+
+Outputs:
+
+  NATGatewayEIP1:
+    Description: A reference to the first NAT Gateway EIP
+    Value: !Ref NatGatewayEIP1
+    Export:
+      Name: !Sub ${AWS::StackName}-NATGatewayEIP1
+  NAtGatewayEIP2:
+    Description: A reference to the second NAT Gateway EIP
+    Value: !Ref NatGatewayEIP2
+    Export:
+      Name: !Sub ${AWS::StackName}-NATGatewayEIP2
+  NATGateway1:
+    Description: A reference to the first NAT Gateway
+    Value: !Ref NATGateway1
+    Export:
+      Name: !Sub ${AWS::StackName}-NATGateway1
+
+  NATGateway2:
+    Description: A reference to the second NAT Gateway
+    Value: !Ref NATGateway2
+    Export:
+      Name: !Sub ${AWS::StackName}-NATGateway2

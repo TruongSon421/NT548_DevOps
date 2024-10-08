@@ -1,0 +1,99 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudFormation template for creating Route Tables'
+
+Parameters:
+  Name:
+    Type: String
+    Description: Name prefix for all resources
+  VPCStack:
+    Type: String
+    Description: Name of the VPC stack to reference
+  NATGatewayStack:
+    Type: String
+    Description: Name of the NAT Gateway stack to reference
+
+Resources:
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Fn::ImportValue:
+          !Sub "${VPCStack}-VPC"
+      Tags:
+        - Key: Name
+          Value: !Sub "${Name}-Public Route Table"
+
+  PrivateRouteTable1:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Fn::ImportValue:
+          !Sub "${VPCStack}-VPC"
+      Tags:
+        - Key: Name
+          Value: Private Route Table 1
+
+  PrivateRoute1:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable1
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: 
+        Fn::ImportValue:
+          !Sub "${NATGatewayStack}-NATGateway1"
+
+  PrivateSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable1
+      SubnetId: 
+        Fn::Select:
+          - 0
+          - Fn::Split:
+            - ','
+            - Fn::ImportValue:
+                !Sub "${VPCStack}-PrivateSubnets"
+
+  PrivateRouteTable2:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Fn::ImportValue:
+          !Sub "${VPCStack}-VPC"
+      Tags:
+        - Key: Name
+          Value: Private Route Table 2
+
+  PrivateRoute2:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable2
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: 
+        Fn::ImportValue:
+          !Sub "${NATGatewayStack}-NATGateway2"
+
+  PrivateSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable2
+      SubnetId: 
+        Fn::Select:
+          - 1
+          - Fn::Split:
+            - ','
+            - Fn::ImportValue:
+                !Sub "${VPCStack}-PrivateSubnets"
+
+Outputs:
+  PrivateRouteTable1:
+    Description: A reference to the first private route table
+    Value: !Ref PrivateRouteTable1
+    Export:
+      Name: !Sub ${AWS::StackName}-PrivateRouteTable1
+
+  PrivateRouteTable2:
+    Description: A reference to the second private route table
+    Value: !Ref PrivateRouteTable2
+    Export:
+      Name: !Sub ${AWS::StackName}-PrivateRouteTable2
