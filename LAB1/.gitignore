@@ -1,0 +1,49 @@
+# Local .terraform directories
+**/.terraform/*
+.terraform.lock.hcl
+
+# Ignore any Terraform plan output files
+*.tfplan
+
+# Ignore any crash logs from Terraform
+crash.log
+
+# Ignore any Terraform variable files containing sensitive data
+# *.tfvars
+# *.tfvars.json
+
+# Ignore override files as they are usually machine-generated
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI-driven configuration files
+.terraformrc
+.terraform.rc
+
+# Ignore backup files created by Terraform
+*.tfstate
+*.tfstate.backup
+
+# Ignore logs
+*.log
+
+# Ignore SSH keys (if you're generating keypairs for AWS)
+*.pem
+*.pub
+
+# Ignore temporary editor or OS files
+*.swp
+*.bak
+*.tmp
+.DS_Store
+
+# Ignore all files in any 'key' folder
+**/key/*
+
+# But don't ignore the 'key' folder itself
+!**/key/
+
+# Optional: Allow specific files inside 'key' folders if needed
+# !**/key/README.md
