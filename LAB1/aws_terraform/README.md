@@ -17,8 +17,6 @@ Follow the steps below to generate an SSH key pair, configure your Terraform pro
 Use `ssh-keygen` to create a new RSA key pair that will be used for SSH access to your EC2 instance.
 
 ```bash
-bash
-Copy code
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
 ```
@@ -50,8 +48,6 @@ my_workstation_ip = "your-device-ip"      # Your local machine IPv4 address for 
 Run the following commands to deploy your EC2 instance:
 
 ```bash
-bash
-Copy code
 terraform init     # Initialize the Terraform working directory
 terraform plan     # Preview the resources to be created
 terraform apply    # Deploy the resources to AWS
@@ -65,8 +61,6 @@ terraform apply    # Deploy the resources to AWS
 After Terraform completes the deployment, you can SSH into your EC2 instance using the private key you generated:
 
 ```bash
-bash
-Copy code
 ssh -i ./key/keyname ec2-user@<your-ec2-public-ip>
 
 ```
@@ -75,8 +69,6 @@ ssh -i ./key/keyname ec2-user@<your-ec2-public-ip>
 - Ensure the private key file (`keyname`) has correct permissions:
 
 ```bash
-bash
-Copy code
 chmod 400 ./keykeyname/
 
 ```
