@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Module tạo Security Groups cho Public và Private EC2 Instances.
+
+Parameters:
+  Name:
+    Type: String
+    Description: Name prefix for all resources
+  VpcId:
+    Type: String
+    Description: ID của VPC
+  PublicAllowedIP:
+    Type: String
+    Description: IP được phép SSH vào Public EC2 instances
+  Tags:
+    Type: Json
+    Description: Tags cho các tài nguyên
+
+Resources:
+  PublicSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow SSH from specific IP"
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref PublicAllowedIP
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: 0
+          ToPort: 0
+          CidrIp: "0.0.0.0/0"
+      Tags:
+        - Key: Name
+          Value: !Sub "${Name}-public-sg"
+        - Key: Environment
+          Value: !GetAtt Tags.Environment
+
+  PrivateSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow SSH from Public EC2 instances"
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          SourceSecurityGroupId: !Ref PublicSecurityGroup
+        - IpProtocol: tcp
+          FromPort: 
+          ToPort: 80
+          SourceSecurityGroupId: !Ref PublicSecurityGroup
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: 0
+          ToPort: 0
+          CidrIp: "0.0.0.0/0"
+      Tags:
+        - Key: Name
+          Value: !Sub "${Name}-private-sg"
+        - Key: Environment
+          Value: !GetAtt Tags.Environment
+
+Outputs:
+  PublicSGId:
+    Description: "ID của Public Security Group"
+    Value: !Ref PublicSecurityGroup
+
+  PrivateSGId:
+    Description: "ID của Private Security Group"
+    Value: !Ref PrivateSecurityGroup
