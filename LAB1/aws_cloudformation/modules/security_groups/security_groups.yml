@@ -1,72 +1,69 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Module tạo Security Groups cho Public và Private EC2 Instances.
+Description: >
+  CloudFormation template to create Security Groups for Public and Private EC2 Instances.
+  - Public EC2 Instance Security Group: Allows SSH from a specific IP.
+  - Private EC2 Instance Security Group: Allows SSH only from Public EC2 Instance Security Group.
 
 Parameters:
-  Name:
+  EnvironmentName:
     Type: String
-    Description: Name prefix for all resources
+    Description: An environment name that is prefixed to resource names
+
   VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID
+
+  AllowedSSHIP:
     Type: String
-    Description: ID của VPC
-  PublicAllowedIP:
-    Type: String
-    Description: IP được phép SSH vào Public EC2 instances
-  Tags:
-    Type: Json
-    Description: Tags cho các tài nguyên
+    Description: CIDR block for SSH access to Public EC2 Instance.
+    Default: "192.168.86.1/32"
 
 Resources:
+  # Security Group cho Public EC2 Instance
   PublicSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "Allow SSH from specific IP"
+      GroupDescription: Security Group for Public EC2 Instance (allow SSH from specific IP)
       VpcId: !Ref VpcId
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
-          CidrIp: !Ref PublicAllowedIP
+          CidrIp: !Ref AllowedSSHIP   
       SecurityGroupEgress:
         - IpProtocol: -1
-          FromPort: 0
-          ToPort: 0
-          CidrIp: "0.0.0.0/0"
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0   
       Tags:
         - Key: Name
-          Value: !Sub "${Name}-public-sg"
-        - Key: Environment
-          Value: !GetAtt Tags.Environment
+          Value: !Sub "${EnvironmentName}-public-sg"
 
+  # Security Group cho Private EC2 Instance
   PrivateSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "Allow SSH from Public EC2 instances"
+      GroupDescription: Security Group for Private EC2 Instance (allow SSH from Public EC2 Instance)
       VpcId: !Ref VpcId
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
-          SourceSecurityGroupId: !Ref PublicSecurityGroup
-        - IpProtocol: tcp
-          FromPort: 
-          ToPort: 80
-          SourceSecurityGroupId: !Ref PublicSecurityGroup
+          SourceSecurityGroupId: !Ref PublicSecurityGroup   
       SecurityGroupEgress:
         - IpProtocol: -1
-          FromPort: 0
-          ToPort: 0
-          CidrIp: "0.0.0.0/0"
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0   
       Tags:
         - Key: Name
-          Value: !Sub "${Name}-private-sg"
-        - Key: Environment
-          Value: !GetAtt Tags.Environment
+          Value: !Sub "${EnvironmentName}-private-sg"
 
 Outputs:
-  PublicSGId:
-    Description: "ID của Public Security Group"
+  PublicSecurityGroupId:
+    Description: ID of the Security Group for Public EC2 Instance
     Value: !Ref PublicSecurityGroup
 
-  PrivateSGId:
-    Description: "ID của Private Security Group"
+  PrivateSecurityGroupId:
+    Description: ID of the Security Group for Private EC2 Instance
     Value: !Ref PrivateSecurityGroup

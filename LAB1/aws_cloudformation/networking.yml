@@ -1,0 +1,147 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Main CloudFormation stack used to deploy the entire infrastructure for the application.
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    Description: An environment name that is prefixed to resource names
+  
+  VpcCIDR:
+    Type: String
+    Description: CIDR block for the VPC
+    Default: "10.0.0.0/16"
+  
+  PublicSubnetCIDR1:
+    Type: String
+    Description: CIDR block for the public subnet 1
+    Default: "10.0.1.0/24"
+
+  PublicSubnetCIDR2:
+    Type: String
+    Description: CIDR block for the public subnet 2
+    Default: "10.0.2.0/24"
+
+  PrivateSubnetCIDR1:
+    Type: String
+    Description: CIDR block for the private subnet 1
+    Default: "10.0.3.0/24"
+
+  PrivateSubnetCIDR2:
+    Type: String
+    Description: CIDR block for the private subnet 2
+    Default: "10.0.4.0/24"
+
+  AvailabilityZone1:
+    Type: String
+    Description: Availability Zone 1
+    Default: "us-east-1a"
+
+  AvailabilityZone2:  
+    Type: String
+    Description: Availability Zone 2
+    Default: "us-east-1b"
+
+  AllowedSSHIP:
+    Type: String
+    Description: CIDR block for SSH access to Public EC2 Instance.
+    Default: "192.168.86.1/32"
+    
+  InstanceType:
+    Type: String
+    Description: Loại EC2 Instance
+    Default: "t2.micro"
+    AllowedValues:
+      - t2.micro
+      - t2.small
+      - t2.medium
+    ConstraintDescription: must be a valid EC2 instance type.
+
+  KeyPairName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Key Pair for EC2 Instance 
+
+  LatestAmiId:
+    Type: String
+    Default: "ami-089f365c7b6a04f00"
+
+Resources:
+  # Nested Stack cho VPC
+  VPCStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://son-cfn-412.s3.amazonaws.com/vpc.yml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        VpcCIDR: !Ref VpcCIDR
+        PublicSubnetCIDR1: !Ref PublicSubnetCIDR1
+        PublicSubnetCIDR2: !Ref PublicSubnetCIDR2
+        PrivateSubnetCIDR1: !Ref PrivateSubnetCIDR1
+        PrivateSubnetCIDR2: !Ref PrivateSubnetCIDR2
+        AvailabilityZone1: !Ref AvailabilityZone1
+        AvailabilityZone2: !Ref AvailabilityZone2
+
+
+  # Nested Stack cho Security Groups
+  SecurityGroupsStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://son-cfn-412.s3.amazonaws.com/security_groups.yml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        VpcId: !GetAtt VPCStack.Outputs.VPCId
+        AllowedSSHIP: !Ref AllowedSSHIP
+
+  # Nested Stack cho EC2 Instances
+  EC2InstancesStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://son-cfn-412.s3.amazonaws.com/ec2.yml
+      Parameters:
+        InstanceType: !Ref InstanceType
+        KeyPairName: !Ref KeyPairName
+        LatestAmiId: !Ref LatestAmiId
+        PublicSubnetIds: !GetAtt VPCStack.Outputs.PublicSubnets
+        PrivateSubnetIds: !GetAtt VPCStack.Outputs.PrivateSubnets
+        PublicSecurityGroupId: !GetAtt SecurityGroupsStack.Outputs.PublicSecurityGroupId
+        PrivateSecurityGroupId: !GetAtt SecurityGroupsStack.Outputs.PrivateSecurityGroupId
+
+    DependsOn:
+      - SecurityGroupsStack
+
+Outputs:
+  VPCId:
+    Description:  VPC ID
+    Value: !GetAtt VPCStack.Outputs.VPCId
+
+  InternetGatewayId:
+    Description: Internet Gateway
+    Value: !GetAtt VPCStack.Outputs.InternetGatewayId
+
+  PublicSubnetIds:
+    Description: List of Public Subnet IDs
+    Value: !GetAtt VPCStack.Outputs.PublicSubnets
+
+  PrivateSubnetIds:
+    Description: List of Private Subnet IDs
+    Value: !GetAtt VPCStack.Outputs.PrivateSubnets
+
+  DefaultSecurityGroup:
+    Description: Security Group
+    Value: !GetAtt VPCStack.Outputs.DefaultSecurityGroup
+
+  PublicSecurityGroupId:
+    Description: Security Group ID for Public Server
+    Value: !GetAtt SecurityGroupsStack.Outputs.PublicSecurityGroupId
+
+  PrivateSecurityGroupId:
+    Description: Security Group ID cho Database
+    Value: !GetAtt SecurityGroupsStack.Outputs.PrivateSecurityGroupId
+
+  PublicEC2InstanceIds:
+    Description: IDs of Public EC2 Instances
+    Value: !GetAtt EC2InstancesStack.Outputs.PublicEC2InstanceIds
+
+  PrivateEC2InstanceIds:
+    Description: IDs of Private EC2 Instances
+    Value: !GetAtt EC2InstancesStack.Outputs.PrivateEC2InstanceIds
