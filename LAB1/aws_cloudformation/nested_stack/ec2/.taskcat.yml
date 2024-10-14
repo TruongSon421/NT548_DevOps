@@ -1,0 +1,34 @@
+project:
+  name: ec2-instance-test
+  parameters:
+    InstanceType: t2.micro  # Loại EC2 instance
+    KeyPairName: your-key-pair-name  # Thay thế bằng tên KeyPair của bạn
+    LatestAmiId: ami-089f365c7b6a04f00  # ID AMI mới nhất (nên thay đổi nếu cần)
+    PublicSubnetIds: subnet-12345678,subnet-87654321  # Thay thế bằng ID Subnet công khai của bạn
+    PrivateSubnetIds: subnet-23456789,subnet-98765432  # Thay thế bằng ID Subnet riêng tư của bạn
+    PublicSecurityGroupId: sg-12345678  # Thay thế bằng ID Security Group công khai
+    PrivateSecurityGroupId: sg-87654321  # Thay thế bằng ID Security Group riêng tư
+
+regions:
+  us-east-1:
+    stacks:
+      - EC2InstanceStack
+
+stacks:
+  EC2InstanceStack:
+    parameters:
+      InstanceType: ${InstanceType}  # Tham số từ project
+      KeyPairName: ${KeyPairName}  # Tham số từ project
+      LatestAmiId: ${LatestAmiId}  # Tham số từ project
+      PublicSubnetIds: ${PublicSubnetIds}  # Tham số từ project
+      PrivateSubnetIds: ${PrivateSubnetIds}  # Tham số từ project
+      PublicSecurityGroupId: ${PublicSecurityGroupId}  # Tham số từ project
+      PrivateSecurityGroupId: ${PrivateSecurityGroupId}  # Tham số từ project
+    template: ec2_with_security_group.yml  # Tên tệp CloudFormation của bạn
+
+tests:
+  basic:
+    regions:
+      - us-east-1
+    stacks:
+      - EC2InstanceStack
