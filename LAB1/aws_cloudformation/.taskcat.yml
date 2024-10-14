@@ -7,8 +7,8 @@ tests:
   nk-stack-test:
     template: networking.yml
     parameters: 
-          EnvironmentName: test
-          KeyPairName: tiendoan
+      EnvironmentName: test
+      KeyPairName: mykeypair
     regions:
       - us-east-1
     tags:

@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  CloudFormation template to create Security Groups for Public and Private EC2 Instances.
+  - Public EC2 Instance Security Group: Allows SSH from a specific IP.
+  - Private EC2 Instance Security Group: Allows SSH only from Public EC2 Instance Security Group.
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    Description: An environment name that is prefixed to resource names
+
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID
+
+  AllowedSSHIP:
+    Type: String
+    Description: CIDR block for SSH access to Public EC2 Instance.
+    Default: "192.168.86.1/32"
+
+Resources:
+  # Security Group cho Public EC2 Instance
+  PublicSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security Group for Public EC2 Instance (allow SSH from specific IP)
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref AllowedSSHIP   
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0   
+      Tags:
+        - Key: Name
+          Value: !Sub "${EnvironmentName}-public-sg"
+
+  # Security Group cho Private EC2 Instance
+  PrivateSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security Group for Private EC2 Instance (allow SSH from Public EC2 Instance)
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          SourceSecurityGroupId: !Ref PublicSecurityGroup   
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0   
+      Tags:
+        - Key: Name
+          Value: !Sub "${EnvironmentName}-private-sg"
+
+Outputs:
+  PublicSecurityGroupId:
+    Description: ID of the Security Group for Public EC2 Instance
+    Value: !Ref PublicSecurityGroup
+
+  PrivateSecurityGroupId:
+    Description: ID of the Security Group for Private EC2 Instance
+    Value: !Ref PrivateSecurityGroup

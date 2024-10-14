@@ -1,0 +1,12 @@
+project:
+  name: vpc-stack-test
+  regions:
+    - us-east-1
+  template: ../vpc.yml
+tests:
+  main-stack-test:
+    template: ../vpc.yml
+    regions:
+      - us-east-1
+    tags:
+      Project: group11-taskcat-test

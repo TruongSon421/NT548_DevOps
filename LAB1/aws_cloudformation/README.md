@@ -68,3 +68,13 @@ aws cloudformation delete-stack --stack-name <your-stack-name>
 
 ### 5.Run test command with TaskCat
 
+Set up environment
+```bash
+pip install taskcat 
+```
+
+Run test command
+```bash
+taskcat test run
+```
+
