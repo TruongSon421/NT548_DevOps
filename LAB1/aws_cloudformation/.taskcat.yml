@@ -1,0 +1,12 @@
+project:
+  name: nk-stack-test
+  regions:
+    - us-east-1
+  template: networking.yml
+tests:
+  nk-stack-test:
+    template: networking.yml
+    regions:
+      - us-east-1
+    tags:
+      Project: group11-taskcat-test
