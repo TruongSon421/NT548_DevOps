@@ -70,7 +70,7 @@ aws cloudformation describe-stacks --stack-name <your-stack-name>
 aws cloudformation delete-stack --stack-name <your-stack-name>
 ```
 
-### 5.Implement test case with TaskCat
+### 5. Test the infrastructure with TaskCat
 
 Install package
 ```bash
