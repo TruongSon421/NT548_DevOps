@@ -65,3 +65,6 @@ aws cloudformation describe-stacks --stack-name <your-stack-name>
 # Destroy Stack
 aws cloudformation delete-stack --stack-name <your-stack-name>
 ```
+
+### 5.Run test command with TaskCat
+
