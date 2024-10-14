@@ -1,0 +1,112 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: 'AWS CloudFormation Sample Template EC2InstanceWithSecurityGroupSample: Create an Amazon EC2 instance running the Amazon Linux AMI. The AMI is chosen based on the region in which the stack is run. This example creates an EC2 security group for the instance to give you SSH access. **WARNING** This template creates an Amazon EC2 instance. You will be billed for the AWS resources used if you create a stack from this template.'
+
+Metadata:
+  License: Apache-2.0
+
+Parameters:
+  
+  InstanceType:
+    Description:  EC2 instance type
+    Type: String
+    AllowedValues:
+      - t2.nano
+      - t2.micro
+      - t2.small
+      - t2.medium
+      - t2.large
+    Default: t2.micro
+    ConstraintDescription: must be a valid EC2 instance type.
+
+  KeyPairName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: AWS::EC2::KeyPair::KeyName
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+  
+  LatestAmiId:
+    Type: String
+    Default: "ami-089f365c7b6a04f00"
+
+  PublicSubnetIds:
+    Type: String
+    Description: A list of public subnet IDs that will be associated with the public route table
+  
+  PrivateSubnetIds:
+    Type: String
+    Description: A list of private subnet IDs that will be associated with the private route tables
+
+  PublicSecurityGroupId:
+    Description: ID of the Security Group for Public EC2 Instance
+    Type: AWS::EC2::SecurityGroup::Id
+
+  PrivateSecurityGroupId:
+    Description: ID of the Security Group for Private EC2 Instance
+    Type: AWS::EC2::SecurityGroup::Id
+
+Resources:
+  PublicEC2Instance1:
+    Type: AWS::EC2::Instance
+    Metadata:
+      guard:
+        SuppressedRules:
+          - INCOMING_SSH_DISABLED
+    Properties:
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyPairName
+      ImageId: !Ref LatestAmiId
+      SecurityGroupIds:
+        - !Ref PublicSecurityGroupId
+      SubnetId: !Select [ 0, !Split [ ",", !Ref PublicSubnetIds] ]
+
+  PublicEC2Instance2:
+    Type: AWS::EC2::Instance
+    Metadata:
+      guard:
+        SuppressedRules:
+          - INCOMING_SSH_DISABLED
+    Properties:
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyPairName
+      ImageId: !Ref LatestAmiId
+      SecurityGroupIds:
+        - !Ref PublicSecurityGroupId
+      SubnetId: !Select [ 1, !Split [ ",", !Ref PublicSubnetIds ] ]
+
+  PrivateEC2Instance1:
+    Type: AWS::EC2::Instance
+    Metadata:
+      guard:
+        SuppressedRules:
+          - INCOMING_SSH_DISABLED
+    Properties:
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyPairName
+      ImageId: !Ref LatestAmiId
+      SecurityGroupIds:
+        - !Ref PrivateSecurityGroupId
+      SubnetId: !Select [ 0, !Split [ ",", !Ref PrivateSubnetIds ] ]
+
+  PrivateEC2Instance2:
+    Type: AWS::EC2::Instance
+    Metadata:
+      guard:
+        SuppressedRules:
+          - INCOMING_SSH_DISABLED
+    Properties:
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyPairName
+      ImageId: !Ref LatestAmiId
+      SecurityGroupIds:
+        - !Ref PrivateSecurityGroupId
+      SubnetId: !Select [ 1, !Split [ ",", !Ref PrivateSubnetIds ] ]
+
+Outputs:
+  PublicEC2InstanceIds:
+    Description: The IDs of the Public EC2 Instances
+    Value: !Join [ ",", [ !Ref PublicEC2Instance1, !Ref PublicEC2Instance2 ] ]
+
+  PrivateEC2InstanceIds:
+    Description: The IDs of the Private EC2 Instances
+    Value: !Join [ ",", [ !Ref PrivateEC2Instance1, !Ref PrivateEC2Instance2 ] ]
+  

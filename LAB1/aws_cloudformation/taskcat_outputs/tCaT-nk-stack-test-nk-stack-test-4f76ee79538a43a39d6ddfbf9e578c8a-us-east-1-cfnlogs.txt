@@ -1,0 +1,175 @@
+-----------------------------------------------------------------------------
+Region: us-east-1
+StackName: tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a
+*****************************************************************************
+ResourceStatusReason:  
+Stack launch was successful
+*****************************************************************************
+*****************************************************************************
+Events:  
+TimeStamp                         ResourceStatus      ResourceType                LogicalResourceId                                                  ResourceStatusReason
+--------------------------------  ------------------  --------------------------  -----------------------------------------------------------------  ---------------------------
+2024-10-14 13:01:38.752000+00:00  CREATE_COMPLETE     AWS::CloudFormation::Stack  tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a
+2024-10-14 13:01:37.618000+00:00  CREATE_COMPLETE     AWS::CloudFormation::Stack  EC2InstancesStack
+2024-10-14 13:01:16.144000+00:00  CREATE_IN_PROGRESS  AWS::CloudFormation::Stack  EC2InstancesStack                                                  Resource creation Initiated
+2024-10-14 13:01:15.357000+00:00  CREATE_IN_PROGRESS  AWS::CloudFormation::Stack  EC2InstancesStack
+2024-10-14 13:01:14.859000+00:00  CREATE_COMPLETE     AWS::CloudFormation::Stack  SecurityGroupsStack
+2024-10-14 13:00:53.338000+00:00  CREATE_IN_PROGRESS  AWS::CloudFormation::Stack  SecurityGroupsStack                                                Resource creation Initiated
+2024-10-14 13:00:52.567000+00:00  CREATE_IN_PROGRESS  AWS::CloudFormation::Stack  SecurityGroupsStack
+2024-10-14 13:00:52.099000+00:00  CREATE_COMPLETE     AWS::CloudFormation::Stack  VPCStack
+2024-10-14 12:58:14.806000+00:00  CREATE_IN_PROGRESS  AWS::CloudFormation::Stack  VPCStack                                                           Resource creation Initiated
+2024-10-14 12:58:14.085000+00:00  CREATE_IN_PROGRESS  AWS::CloudFormation::Stack  VPCStack
+2024-10-14 12:58:11.693000+00:00  CREATE_IN_PROGRESS  AWS::CloudFormation::Stack  tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a  User Initiated
+*****************************************************************************
+-----------------------------------------------------------------------------
+Tested on: Monday, 14. October 2024 08:02PM
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+Region: us-east-1
+StackName: tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a-VPCStack-1AJYL5SB4SFEG
+*****************************************************************************
+ResourceStatusReason:  
+Stack launch was successful
+*****************************************************************************
+*****************************************************************************
+Events:  
+TimeStamp                         ResourceStatus      ResourceType                           LogicalResourceId                                                                         ResourceStatusReason
+--------------------------------  ------------------  -------------------------------------  ----------------------------------------------------------------------------------------  ------------------------------------
+2024-10-14 13:00:38.900000+00:00  CREATE_COMPLETE     AWS::CloudFormation::Stack             tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a-VPCStack-1AJYL5SB4SFEG
+2024-10-14 13:00:37.916000+00:00  CREATE_COMPLETE     AWS::EC2::Route                        PrivateRoute2
+2024-10-14 13:00:37.613000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Route                        PrivateRoute2                                                                             Resource creation Initiated
+2024-10-14 13:00:36.351000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Route                        PrivateRoute2
+2024-10-14 13:00:35.853000+00:00  CREATE_COMPLETE     AWS::EC2::NatGateway                   NatGateway2
+2024-10-14 13:00:22.267000+00:00  CREATE_COMPLETE     AWS::EC2::Route                        PrivateRoute1
+2024-10-14 13:00:21.937000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Route                        PrivateRoute1                                                                             Resource creation Initiated
+2024-10-14 13:00:20.510000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Route                        PrivateRoute1
+2024-10-14 13:00:20.051000+00:00  CREATE_COMPLETE     AWS::EC2::NatGateway                   NatGateway1
+2024-10-14 12:58:44.775000+00:00  CREATE_IN_PROGRESS  AWS::EC2::NatGateway                   NatGateway2                                                                               Eventual consistency check initiated
+2024-10-14 12:58:44.117000+00:00  CREATE_COMPLETE     AWS::EC2::Route                        PublicRoute
+2024-10-14 12:58:43.796000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Route                        PublicRoute                                                                               Resource creation Initiated
+2024-10-14 12:58:42.651000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Route                        PublicRoute
+2024-10-14 12:58:41.639000+00:00  CREATE_COMPLETE     AWS::EC2::RouteTable                   PrivateRouteTable2
+2024-10-14 12:58:41.616000+00:00  CREATE_COMPLETE     AWS::EC2::RouteTable                   PrivateRouteTable1
+2024-10-14 12:58:41.586000+00:00  CREATE_COMPLETE     AWS::EC2::RouteTable                   PublicRouteTable
+2024-10-14 12:58:36.920000+00:00  CREATE_COMPLETE     AWS::EC2::SubnetRouteTableAssociation  PublicSubnet2RouteTableAssociation
+2024-10-14 12:58:36.658000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SubnetRouteTableAssociation  PublicSubnet2RouteTableAssociation                                                        Resource creation Initiated
+2024-10-14 12:58:36.282000+00:00  CREATE_IN_PROGRESS  AWS::EC2::NatGateway                   NatGateway1                                                                               Eventual consistency check initiated
+2024-10-14 12:58:36.002000+00:00  CREATE_COMPLETE     AWS::EC2::SubnetRouteTableAssociation  PublicSubnet1RouteTableAssociation
+2024-10-14 12:58:35.813000+00:00  CREATE_IN_PROGRESS  AWS::EC2::NatGateway                   NatGateway2                                                                               Resource creation Initiated
+2024-10-14 12:58:35.801000+00:00  CREATE_COMPLETE     AWS::EC2::SubnetRouteTableAssociation  PrivateSubnet2RouteTableAssociation
+2024-10-14 12:58:35.794000+00:00  CREATE_COMPLETE     AWS::EC2::SubnetRouteTableAssociation  PrivateSubnet1RouteTableAssociation
+2024-10-14 12:58:35.721000+00:00  CREATE_IN_PROGRESS  AWS::EC2::NatGateway                   NatGateway1                                                                               Resource creation Initiated
+2024-10-14 12:58:35.676000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SubnetRouteTableAssociation  PublicSubnet1RouteTableAssociation                                                        Resource creation Initiated
+2024-10-14 12:58:35.532000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SubnetRouteTableAssociation  PrivateSubnet2RouteTableAssociation                                                       Resource creation Initiated
+2024-10-14 12:58:35.486000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SubnetRouteTableAssociation  PrivateSubnet1RouteTableAssociation                                                       Resource creation Initiated
+2024-10-14 12:58:34.646000+00:00  CREATE_IN_PROGRESS  AWS::EC2::NatGateway                   NatGateway2
+2024-10-14 12:58:34.604000+00:00  CREATE_IN_PROGRESS  AWS::EC2::NatGateway                   NatGateway1
+2024-10-14 12:58:34.522000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SubnetRouteTableAssociation  PublicSubnet1RouteTableAssociation
+2024-10-14 12:58:34.493000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SubnetRouteTableAssociation  PublicSubnet2RouteTableAssociation
+2024-10-14 12:58:34.447000+00:00  CREATE_COMPLETE     AWS::EC2::SecurityGroup                DefaultSecurityGroup
+2024-10-14 12:58:34.246000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SubnetRouteTableAssociation  PrivateSubnet2RouteTableAssociation
+2024-10-14 12:58:34.151000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SubnetRouteTableAssociation  PrivateSubnet1RouteTableAssociation
+2024-10-14 12:58:34.075000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SecurityGroup                DefaultSecurityGroup                                                                      Resource creation Initiated
+2024-10-14 12:58:34.071000+00:00  CREATE_COMPLETE     AWS::EC2::Subnet                       PublicSubnet1
+2024-10-14 12:58:34.050000+00:00  CREATE_COMPLETE     AWS::EC2::Subnet                       PublicSubnet2
+2024-10-14 12:58:34.021000+00:00  CREATE_COMPLETE     AWS::EC2::EIP                          NatGatewayEIP1
+2024-10-14 12:58:34.008000+00:00  CREATE_COMPLETE     AWS::EC2::EIP                          NatGatewayEIP2
+2024-10-14 12:58:33.973000+00:00  CREATE_COMPLETE     AWS::EC2::InternetGateway              InternetGateway
+2024-10-14 12:58:33.801000+00:00  CREATE_COMPLETE     AWS::EC2::Subnet                       PrivateSubnet2
+2024-10-14 12:58:33.719000+00:00  CREATE_COMPLETE     AWS::EC2::Subnet                       PrivateSubnet1
+2024-10-14 12:58:32.708000+00:00  CREATE_COMPLETE     AWS::EC2::VPCGatewayAttachment         AttachGateway
+2024-10-14 12:58:31.728000+00:00  CREATE_IN_PROGRESS  AWS::EC2::RouteTable                   PrivateRouteTable1                                                                        Eventual consistency check initiated
+2024-10-14 12:58:31.688000+00:00  CREATE_IN_PROGRESS  AWS::EC2::RouteTable                   PrivateRouteTable2                                                                        Eventual consistency check initiated
+2024-10-14 12:58:31.686000+00:00  CREATE_IN_PROGRESS  AWS::EC2::RouteTable                   PublicRouteTable                                                                          Eventual consistency check initiated
+2024-10-14 12:58:31.287000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Subnet                       PublicSubnet2                                                                             Resource creation Initiated
+2024-10-14 12:58:31.216000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Subnet                       PublicSubnet1                                                                             Resource creation Initiated
+2024-10-14 12:58:31.186000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Subnet                       PrivateSubnet2                                                                            Resource creation Initiated
+2024-10-14 12:58:31.121000+00:00  CREATE_IN_PROGRESS  AWS::EC2::RouteTable                   PrivateRouteTable1                                                                        Resource creation Initiated
+2024-10-14 12:58:31.094000+00:00  CREATE_IN_PROGRESS  AWS::EC2::RouteTable                   PrivateRouteTable2                                                                        Resource creation Initiated
+2024-10-14 12:58:31.093000+00:00  CREATE_IN_PROGRESS  AWS::EC2::RouteTable                   PublicRouteTable                                                                          Resource creation Initiated
+2024-10-14 12:58:31.026000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Subnet                       PrivateSubnet1                                                                            Resource creation Initiated
+2024-10-14 12:58:31.002000+00:00  CREATE_IN_PROGRESS  AWS::EC2::VPCGatewayAttachment         AttachGateway                                                                             Resource creation Initiated
+2024-10-14 12:58:30.160000+00:00  CREATE_IN_PROGRESS  AWS::EC2::VPCGatewayAttachment         AttachGateway
+2024-10-14 12:58:30.154000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Subnet                       PrivateSubnet2
+2024-10-14 12:58:30.131000+00:00  CREATE_IN_PROGRESS  AWS::EC2::RouteTable                   PublicRouteTable
+2024-10-14 12:58:30.131000+00:00  CREATE_IN_PROGRESS  AWS::EC2::RouteTable                   PrivateRouteTable2
+2024-10-14 12:58:30.116000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Subnet                       PublicSubnet1
+2024-10-14 12:58:30.112000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Subnet                       PrivateSubnet1
+2024-10-14 12:58:30.108000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SecurityGroup                DefaultSecurityGroup
+2024-10-14 12:58:30.104000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Subnet                       PublicSubnet2
+2024-10-14 12:58:30.096000+00:00  CREATE_IN_PROGRESS  AWS::EC2::RouteTable                   PrivateRouteTable1
+2024-10-14 12:58:29.665000+00:00  CREATE_COMPLETE     AWS::EC2::VPC                          VPC
+2024-10-14 12:58:19.085000+00:00  CREATE_IN_PROGRESS  AWS::EC2::InternetGateway              InternetGateway                                                                           Eventual consistency check initiated
+2024-10-14 12:58:18.923000+00:00  CREATE_IN_PROGRESS  AWS::EC2::EIP                          NatGatewayEIP1                                                                            Eventual consistency check initiated
+2024-10-14 12:58:18.881000+00:00  CREATE_IN_PROGRESS  AWS::EC2::EIP                          NatGatewayEIP2                                                                            Eventual consistency check initiated
+2024-10-14 12:58:18.678000+00:00  CREATE_IN_PROGRESS  AWS::EC2::VPC                          VPC                                                                                       Resource creation Initiated
+2024-10-14 12:58:18.437000+00:00  CREATE_IN_PROGRESS  AWS::EC2::InternetGateway              InternetGateway                                                                           Resource creation Initiated
+2024-10-14 12:58:18.296000+00:00  CREATE_IN_PROGRESS  AWS::EC2::EIP                          NatGatewayEIP1                                                                            Resource creation Initiated
+2024-10-14 12:58:18.275000+00:00  CREATE_IN_PROGRESS  AWS::EC2::EIP                          NatGatewayEIP2                                                                            Resource creation Initiated
+2024-10-14 12:58:17.285000+00:00  CREATE_IN_PROGRESS  AWS::EC2::InternetGateway              InternetGateway
+2024-10-14 12:58:17.277000+00:00  CREATE_IN_PROGRESS  AWS::EC2::EIP                          NatGatewayEIP1
+2024-10-14 12:58:17.243000+00:00  CREATE_IN_PROGRESS  AWS::EC2::EIP                          NatGatewayEIP2
+2024-10-14 12:58:17.222000+00:00  CREATE_IN_PROGRESS  AWS::EC2::VPC                          VPC
+2024-10-14 12:58:14.664000+00:00  CREATE_IN_PROGRESS  AWS::CloudFormation::Stack             tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a-VPCStack-1AJYL5SB4SFEG  User Initiated
+*****************************************************************************
+-----------------------------------------------------------------------------
+Tested on: Monday, 14. October 2024 08:02PM
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+Region: us-east-1
+StackName: tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a-EC2InstancesStack-HLYATWK72639
+*****************************************************************************
+ResourceStatusReason:  
+Stack launch was successful
+*****************************************************************************
+*****************************************************************************
+Events:  
+TimeStamp                         ResourceStatus      ResourceType                LogicalResourceId                                                                                 ResourceStatusReason
+--------------------------------  ------------------  --------------------------  ------------------------------------------------------------------------------------------------  ------------------------------------
+2024-10-14 13:01:32.653000+00:00  CREATE_COMPLETE     AWS::CloudFormation::Stack  tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a-EC2InstancesStack-HLYATWK72639
+2024-10-14 13:01:31.715000+00:00  CREATE_COMPLETE     AWS::EC2::Instance          PrivateEC2Instance2
+2024-10-14 13:01:31.649000+00:00  CREATE_COMPLETE     AWS::EC2::Instance          PrivateEC2Instance1
+2024-10-14 13:01:31.451000+00:00  CREATE_COMPLETE     AWS::EC2::Instance          PublicEC2Instance2
+2024-10-14 13:01:31.181000+00:00  CREATE_COMPLETE     AWS::EC2::Instance          PublicEC2Instance1
+2024-10-14 13:01:22.640000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Instance          PublicEC2Instance2                                                                                Eventual consistency check initiated
+2024-10-14 13:01:22.465000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Instance          PublicEC2Instance1                                                                                Eventual consistency check initiated
+2024-10-14 13:01:20.686000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Instance          PublicEC2Instance2                                                                                Resource creation Initiated
+2024-10-14 13:01:20.549000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Instance          PrivateEC2Instance2                                                                               Resource creation Initiated
+2024-10-14 13:01:20.526000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Instance          PrivateEC2Instance1                                                                               Resource creation Initiated
+2024-10-14 13:01:20.498000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Instance          PublicEC2Instance1                                                                                Resource creation Initiated
+2024-10-14 13:01:18.735000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Instance          PrivateEC2Instance1
+2024-10-14 13:01:18.698000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Instance          PublicEC2Instance2
+2024-10-14 13:01:18.677000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Instance          PublicEC2Instance1
+2024-10-14 13:01:18.658000+00:00  CREATE_IN_PROGRESS  AWS::EC2::Instance          PrivateEC2Instance2
+2024-10-14 13:01:16.022000+00:00  CREATE_IN_PROGRESS  AWS::CloudFormation::Stack  tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a-EC2InstancesStack-HLYATWK72639  User Initiated
+*****************************************************************************
+-----------------------------------------------------------------------------
+Tested on: Monday, 14. October 2024 08:02PM
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+Region: us-east-1
+StackName: tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a-SecurityGroupsStack-K2UEEJU7LQHE
+*****************************************************************************
+ResourceStatusReason:  
+Stack launch was successful
+*****************************************************************************
+*****************************************************************************
+Events:  
+TimeStamp                         ResourceStatus      ResourceType                LogicalResourceId                                                                                   ResourceStatusReason
+--------------------------------  ------------------  --------------------------  --------------------------------------------------------------------------------------------------  ---------------------------
+2024-10-14 13:01:06.296000+00:00  CREATE_COMPLETE     AWS::CloudFormation::Stack  tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a-SecurityGroupsStack-K2UEEJU7LQHE
+2024-10-14 13:01:05.251000+00:00  CREATE_COMPLETE     AWS::EC2::SecurityGroup     PrivateSecurityGroup
+2024-10-14 13:01:04.519000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SecurityGroup     PrivateSecurityGroup                                                                                Resource creation Initiated
+2024-10-14 13:01:00.499000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SecurityGroup     PrivateSecurityGroup
+2024-10-14 13:01:00.059000+00:00  CREATE_COMPLETE     AWS::EC2::SecurityGroup     PublicSecurityGroup
+2024-10-14 13:00:59.592000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SecurityGroup     PublicSecurityGroup                                                                                 Resource creation Initiated
+2024-10-14 13:00:55.892000+00:00  CREATE_IN_PROGRESS  AWS::EC2::SecurityGroup     PublicSecurityGroup
+2024-10-14 13:00:53.209000+00:00  CREATE_IN_PROGRESS  AWS::CloudFormation::Stack  tCaT-nk-stack-test-nk-stack-test-4f76ee79538a43a39d6ddfbf9e578c8a-SecurityGroupsStack-K2UEEJU7LQHE  User Initiated
+*****************************************************************************
+-----------------------------------------------------------------------------
+Tested on: Monday, 14. October 2024 08:02PM
+-----------------------------------------------------------------------------
+

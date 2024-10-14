@@ -1,0 +1,34 @@
+[
+    {
+        "ParameterKey": "EnvironmentName",
+        "ParameterValue": "development"
+    },
+    {
+      "ParameterKey": "VpcCIDR",
+      "ParameterValue": "10.16.0.0/16"
+    },
+    {
+      "ParameterKey": "PublicSubnetCIDR1",
+      "ParameterValue": "10.16.32.0/24"
+    },
+    {
+      "ParameterKey": "PublicSubnetCIDR2",
+      "ParameterValue": "10.16.96.0/24"
+    },
+    {
+        "ParameterKey": "PrivateSubnetCIDR1",
+        "ParameterValue": "10.16.48.0/24"
+    },
+    {
+        "ParameterKey": "PrivateSubnetCIDR2",
+        "ParameterValue": "10.16.112.0/24"
+    },
+    {
+        "ParameterKey": "AvailabilityZone1",
+        "ParameterValue": "us-east-1a"
+    },
+    {
+        "ParameterKey": "AvailabilityZone2",
+        "ParameterValue": "us-east-1b"
+    }
+  ]
