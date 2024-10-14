@@ -12,17 +12,22 @@ Follow the steps below to generate an key pair, configure your CloudFormation St
 
 ### Steps
 
-### 1. Generate an Key Pair
+### 1. Create S3 Bucket
+
+```bash
+aws s3api create-bucket --bucket <s3_bucket_name> --region <your_region>
+```
+
+### 2. Generate an Key Pair
 
 Use `aws ec2 create-key-pair` to create a new RSA key pair that will be used for SSH access to your EC2 instance.
 
 ```bash
 aws ec2 create-key-pair --key-name <namekeypair>
-
 ```
 
 
-### 2. Configure CloudFormation Stack
+### 3. Configure CloudFormation
 
 Edit your `parameter.json` file to include the path to the key name and your IP address for SSH access:
 
@@ -40,7 +45,7 @@ Edit your `parameter.json` file to include the path to the key name and your IP 
 - Replace `namekeypair` with name key pair you create .
 - Replace `your-device-ip` with your current machine’s IP address (use [WhatIsMyIP](https://www.whatismyip.com/) or run `curl ifconfig.me` to find your public IP).
 
-### 3. Initialize CloudFormation Nested Stack and Apply Configuration
+### 4. Initialize CloudFormation Nested Stack and Apply Configuration
 
 Run the following commands to deploy your EC2 instance:
 
