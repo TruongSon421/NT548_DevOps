@@ -12,13 +12,17 @@ Follow the steps below to generate an key pair, configure your CloudFormation St
 
 ### Steps
 
-### 1. Create S3 Bucket
+```bash
+cd .\LAB1\aws_cloudformation\
+```
+
+### 1. Create a S3 Bucket.
 
 ```bash
 aws s3api create-bucket --bucket <s3_bucket_name> --region <your_region>
 ```
 
-### 2. Generate an Key Pair
+### 2. Generate a Key Pair
 
 Use `aws ec2 create-key-pair` to create a new RSA key pair that will be used for SSH access to your EC2 instance.
 
@@ -34,15 +38,15 @@ Edit your `parameter.json` file to include the path to the key name and your IP 
 ```json
     {
         "ParameterKey": "AllowedSSHIP",
-        "ParameterValue": "your-device-ip" 
+        "ParameterValue": "<your-device-ip>" 
     },
     {
         "ParameterKey": "KeyPairName",
-        "ParameterValue": "namekeypair"
+        "ParameterValue": "<namekeypair>"
     }
 ```
 
-- Replace `namekeypair` with name key pair you create .
+- Replace `namekeypair` with the name of your key pair.
 - Replace `your-device-ip` with your current machine’s IP address (use [WhatIsMyIP](https://www.whatismyip.com/) or run `curl ifconfig.me` to find your public IP).
 
 ### 4. Initialize CloudFormation Nested Stack and Apply Configuration
@@ -53,12 +57,12 @@ Run the following commands to deploy your EC2 instance:
 # Check and verify the validity of the stacks
 cfn-lint **/*.yml  
 # Upload nested stack to S3
-aws s3 cp /path/to/your/directory s3://your-bucket-name/ --recursive --exclude "*" --include "*.yml" 
+aws s3 cp .\nested_stack s3://your-bucket-name/ --recursive --exclude "*" --include "*.yml" 
 # Deploy the resources to AWS
 aws cloudformation create-stack \
     --stack-name <nameStack>   \
-    --template-body file://path/to/your/template.yaml   \
-    --parameters file://path/to/your/parameter.json   \
+    --template-body file://networking.yaml   \
+    --parameters file://parameter.json   \
     --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND
 # Check status of Stack
 aws cloudformation describe-stacks --stack-name <your-stack-name>
@@ -66,9 +70,9 @@ aws cloudformation describe-stacks --stack-name <your-stack-name>
 aws cloudformation delete-stack --stack-name <your-stack-name>
 ```
 
-### 5.Run test command with TaskCat
+### 5.Implement test case with TaskCat
 
-Set up environment
+Install package
 ```bash
 pip install taskcat 
 ```
