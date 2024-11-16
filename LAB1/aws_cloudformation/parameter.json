@@ -41,6 +41,6 @@
     },
     {
         "ParameterKey": "KeyPairName",
-        "ParameterValue": "tiendoan"
+        "ParameterValue": "mykeypair"
     }
   ]
