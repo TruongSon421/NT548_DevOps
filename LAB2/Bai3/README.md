@@ -33,10 +33,10 @@ docker run --name jenkins-docker --rm --detach ^
   --volume jenkins-docker-certs:/certs/client ^
   --volume jenkins-data:/var/jenkins_home ^
   --publish 2376:2376 ^
-  --publish 8081:8081 ^
+  --publish 8081:8081 ^  
   docker:dind
 ```
-
+Publish port 8081 to test API from our application
 ### 3.Create Dockerfile for Jenkins
 Create a Dockerfile for a customized Jenkins image with Docker support:
 
@@ -71,11 +71,13 @@ docker run --name jenkins-blueocean --restart=on-failure --detach ^
 ## Set up SonarQube with Docker
 ### 1. Run SonarQube Container
 Run the SonarQube container in the same network as Jenkins:
-
 ```
 docker run -d --name sonarqube -p 9000:9000 --network jenkins sonarqube:latest
 ```
-SonarQube will be available at http://localhost:9000.
+SonarQube will be available at http://localhost:9000. 
+Default account:
+- Username: admin
+- Password: admin
 
 ### 2. Generate SonarQube Token
 Create a SonarQube token by navigating to My Account -> Security -> Generate Tokens. Save this token for later use in Jenkins.
