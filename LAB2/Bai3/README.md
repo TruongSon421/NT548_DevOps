@@ -90,8 +90,8 @@ Get the Administrator password:
 
 ```
 docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
-Once logged in, choose Install suggested plugins.
 ```
+Once logged in, choose Install suggested plugins.
 
 ### 2. Install Necessary Plugins
 Go to Dashboard -> Manage Jenkins -> Plugins -> Available and install the following plugins:
