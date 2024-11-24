@@ -74,8 +74,9 @@ Run the SonarQube container in the same network as Jenkins:
 
 ```
 docker run -d --name sonarqube -p 9000:9000 --network jenkins sonarqube:latest
-SonarQube will be available at http://localhost:9000.
 ```
+SonarQube will be available at http://localhost:9000.
+
 ### 2. Generate SonarQube Token
 Create a SonarQube token by navigating to My Account -> Security -> Generate Tokens. Save this token for later use in Jenkins.
 
